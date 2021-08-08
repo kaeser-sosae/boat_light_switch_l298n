@@ -6,6 +6,9 @@ import time
 import os
 import RPi.GPIO as GPIO
 from time import sleep
+import pigpio
+
+pi = pigpio.pi('localhost', 8888)
 
 
 in1 = 24
@@ -48,7 +51,8 @@ def setup():#Motor initialization
 
     try:
         #pwm_A = GPIO.PWM(Motor_A_EN, 10000)
-        pwm_A = HardwarePWM(0, hz=100)
+        #pwm_A = HardwarePWM(0, hz=100)
+        pi.set_PWM_frequency(18,0)
     except:
         print('Could not define PWM pin')
 
@@ -65,13 +69,15 @@ def motor1(status, direction, speed):#Motor 1 positive and negative rotation
         if direction == Dir_forward:#
             GPIO.output(Motor_A_Pin1, GPIO.HIGH)
             GPIO.output(Motor_A_Pin2, GPIO.LOW)
-            pwm_A.start(100)
-            pwm_A.change_duty_cycle(speed)
+            pi.set_PWM_dutycycle(18,speed)
+            #pwm_A.start(100)
+            #pwm_A.change_duty_cycle(speed)
         elif direction == Dir_backward:
             GPIO.output(Motor_A_Pin1, GPIO.LOW)
             GPIO.output(Motor_A_Pin2, GPIO.HIGH)
-            pwm_A.start(100)
-            pwm_A.change_duty_cycle(speed)
+            pi.set_PWM_dutycycle(18,speed)
+            #pwm_A.start(100)
+            #pwm_A.change_duty_cycle(speed)
     return direction
 
 def destroy():
