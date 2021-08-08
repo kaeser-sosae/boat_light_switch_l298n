@@ -25,13 +25,13 @@ import time
 
 Motor_A_EN    = 25
 
-Motor_A_Pin1  = 24
-Motor_A_Pin2  = 23
+Motor_A_Pin1  = 18
+Motor_A_Pin2  = 12
 
 Dir_forward   = 0
 Dir_backward  = 1
 
-pwm_A = 0
+pwm_A = 0 # PWM Channel
 
 #GPIO.setmode(GPIO.BOARD)
 
@@ -45,17 +45,13 @@ def setup():#Motor initialization
 
     try:
         pwm_A = GPIO.PWM(Motor_A_EN, 1000)
-        pwm_B = GPIO.PWM(Motor_B_EN, 1000)
     except:
-        pass
+        print('Could not define PWM pin')
 
 def motorStop():#Motor stops
     GPIO.output(Motor_A_Pin1, GPIO.LOW)
     GPIO.output(Motor_A_Pin2, GPIO.LOW)
-    GPIO.output(Motor_B_Pin1, GPIO.LOW)
-    GPIO.output(Motor_B_Pin2, GPIO.LOW)
     GPIO.output(Motor_A_EN, GPIO.LOW)
-    GPIO.output(Motor_B_EN, GPIO.LOW)
 
 def motor1(status, direction, speed):#Motor 1 positive and negative rotation
     global pwm_A
