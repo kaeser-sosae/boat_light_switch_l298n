@@ -83,6 +83,11 @@ while(1):
 
         x=input()
     
+        if x=='0':
+                print("motor stop")
+                motorStop()
+                x='z'
+
         if x=='1':
                 print("motor right")
                 motor1(1, Dir_backward, 1)
