@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta name=”apple-mobile-web-app-capable” content=”yes”>
+
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap-grid.css" rel="stylesheet">
+  <link href="css/bootstrap-reboot.css" rel="stylesheet">
+  <link href="css/bootstrap-utilities.css" rel="stylesheet">
+  <link href="css/bootstrap-switch-button.css" rel="stylesheet">
+  <script src="js/bootstrap-switch-button.js"></script>
+  <script src="js/bootstrap.bundle.js"></script>
+  <script src="js/jquery-3.6.0.min.js"></script>
+
+  <style>
+
+    { margin: 0; padding: 0; }
+
+    body { 
+        background: url('images/background.jpeg') no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    html, body {
+      width:100%;
+      height:100%;
+      padding:0;
+      margin:0;
+    }
+    body {
+      background-color:#232323!important;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .page {
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-direction: row;
+    }
+    .page > .side {
+      width:30%;
+      padding:15px;
+      display:flex;
+      flex-direction:column;
+      background: rgb(28,122,226);
+      background: linear-gradient(235deg, rgba(28,122,226,1) 0%, rgba(66,230,222,1) 90%);
+      justify-content:space-between
+    }
+    .side .header {
+      
+    }
+    .side .center {
+      display:flex;
+      flex-direction:column;
+      
+    }
+    .side .center .icon {
+      display:block;
+      overflow:hidden;
+    }
+    .side .center .icon svg {
+      
+    }
+    .side .center  h1 {
+      color:#FFF;
+      margin:0;
+      font-weight:400;
+      font-size:34px;
+    }
+    .side .center  h3 {
+      color:#FFF;
+      margin:5px 0 0 0;
+      font-weight:300;
+      font-size:16px;
+    }
+
+    .side .bottom {
+    }
+
+    .back-btn {
+      border:2px solid #FFF;
+      color:#FFF;
+      background:transparent;
+      font-size:24px;
+      border-radius:4px;
+      width:100%;
+      display:block;
+    }
+
+    .page > .main {
+      width:70%;
+      display:flex;
+      flex-direction:row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page > .main > .light {
+      width:150px;
+      display:inline-block;
+      
+    }
+
+    .light .icon {
+      margin: 0 auto;
+      text-align:center;
+      display:block;
+      height: 40px;
+      width: 40px;
+      color: rgba(255,255,255,0.3);
+      font-size: 30px;
+      padding-top:5px;
+    }
+    .light .icon ha-icon {
+      width:30px;
+      height:30px;
+    }
+    .light .icon.on ha-icon {
+      fill: #f7d959;
+    }
+    h2 {
+      color: #FFF;
+      display: block;
+      font-weight: 300;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size:20px;
+      margin-top:0;
+    }
+    h4 {
+      color: #FFF;
+      display: block;
+      font-weight: 300;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size:16px;
+      margin-top:0;
+    }
+    h4.brightness:after {
+      content: "%";
+      padding-left: 1px;
+    }
+
+    .range-holder {
+      height: var(--slider-height);
+      position:relative;
+      display: block;
+    }
+    .range-holder input[type="range"] {
+      outline: 0;
+      border: 0;
+      border-radius: 4px;
+      width: var(--slider-height);
+      margin: 0;
+      transition: box-shadow 0.2s ease-in-out;
+      -webkit-transform:rotate(270deg);
+      -moz-transform:rotate(270deg);
+      -o-transform:rotate(270deg);
+      -ms-transform:rotate(270deg);
+      transform:rotate(270deg);
+      overflow: hidden;
+      height: var(--slider-width);
+      -webkit-appearance: none;
+      background-color: #ddd;
+      position: absolute;
+      top: calc(50% - (var(--slider-width) / 2));
+      right: calc(50% - (var(--slider-height) / 2));
+    }
+    .range-holder input[type="range"]::-webkit-slider-runnable-track {
+      height: var(--slider-width);
+      -webkit-appearance: none;
+      color: #ddd;
+      margin-top: -1px;
+      transition: box-shadow 0.2s ease-in-out;
+    }
+    .range-holder input[type="range"]::-webkit-slider-thumb {
+      width: 25px;
+      border-right:10px solid #FFF;
+      border-left:10px solid #FFF;
+      border-top:20px solid #FFF;
+      border-bottom:20px solid #FFF;
+      -webkit-appearance: none;
+      height: 80px;
+      cursor: ew-resize;
+      background: #fff;
+      box-shadow: -350px 0 0 350px #FFF, inset 0 0 0 80px #ddd;
+      border-radius: 0;
+      transition: box-shadow 0.2s ease-in-out;
+      position: relative;
+      top: calc((var(--slider-width) - 80px) / 2);
+    }
+    .switch-holder {
+      height: var(--switch-height);
+      position:relative;
+      display: block;
+    }
+    .switch-holder input[type="range"] {
+      outline: 0;
+      border: 0;
+      border-radius: 4px;
+      width: calc(var(--switch-height) - 20px);
+      margin: 0;
+      transition: box-shadow 0.2s ease-in-out;
+      -webkit-transform: rotate(270deg);
+      -moz-transform: rotate(270deg);
+      -o-transform: rotate(270deg);
+      -ms-transform: rotate(270deg);
+      transform: rotate(270deg);
+      overflow: hidden;
+      height: calc(var(--switch-width) - 20px);
+      -webkit-appearance: none;
+      background-color: #ddd;
+      padding: 10px;
+      position: absolute;
+      top: calc(50% - (var(--switch-width) / 2));
+      right: calc(50% - (var(--switch-height) / 2));
+    }
+    .switch-holder input[type="range"]::-webkit-slider-runnable-track {
+      height: calc(var(--switch-width) - 20px);
+      -webkit-appearance: none;
+      color: #ddd;
+      margin-top: -1px;
+      transition: box-shadow 0.2s ease-in-out;
+    }
+    .switch-holder input[type="range"]::-webkit-slider-thumb {
+      width: calc(var(--switch-height) / 2);
+      -webkit-appearance: none;
+      height: calc(var(--switch-width) - 20px);
+      cursor: ew-resize;
+      background: #fff;
+      transition: box-shadow 0.2s ease-in-out;
+      box-shadow: -340px 0 0 350px #ddd, inset 0 0 0 80px #FFF;
+      position: relative;
+      top: 0;
+      border-radius: 4px;
+    }
+
+    .scene-holder {
+      display: flex;
+      flex-direction: column;
+      margin-top:20px;
+    }
+    .scene-row {
+      display:block;
+      text-align:center;
+      padding-bottom:10px;
+    }
+    .scene-row:last-child {
+      padding:0;
+    }
+    .scene-holder .scene {
+      display:inline-block;
+      margin-right:10px;
+      cursor:pointer;
+    }
+    .scene-holder .scene:nth-child(4n) {
+      margin-right:0;
+    }
+    .scene-holder .scene .color {
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      display:block;
+    }
+    .scene-holder .scene .name {
+      width:50px;
+      overflow:hidden;
+      display:block;
+      color: #FFF;
+      font-size: 9px;
+      margin-top:3px;
+    }
+
+    .toggle {
+      margin-top:30px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .toggle > input.toggle-btn {
+      display: none;
+    }
+    .toggle > input.toggle-btn + label {
+      border: 1px solid #FFF;
+      background: transparent;
+      width:50px;
+      height:50px;
+      text-align:center;
+      line-height:50px;
+      cursor: pointer;
+      border-radius: 4px;
+      color:#FFF;
+      display:block;
+      font-size:22px;
+    }
+    .toggle > input.toggle-btn:not(:checked) + label > span:before {
+      content: 'Off';
+    }
+    .toggle > input.toggle-btn + label:active,
+    .toggle > input.toggle-btn:checked + label {
+      background: #1c7ae2;
+      border-color: #1c7ae2;
+    }
+    .toggle > input.toggle-btn:checked + label > span:before {
+      content: 'On';
+    }
+
+  </style>
+
+  <script>
+
+    var IsBeingTouched = false;
+
+    function touchStart(){
+      IsBeingTouched = true;
+    }
+
+    function touchEnd(){
+      setTimeout(function(){ 
+        IsBeingTouched = false;
+      }, 1000);
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    $(document).ready(function()
+    {
+      setInterval(function(){ 
+        for (let i = 1; i < 7; i++) {
+          $.get( "/get_relay_value?relay_number=" + i, function( data ) {
+            if(data) {
+              if (data == "on"){
+                if (document.getElementById('relay' + i).checked == false){
+                  if (IsBeingTouched == false) {
+                    document.getElementById('relay' + i).switchButton(data, true)
+                  }
+                }
+              }
+              if (data == "off"){
+                if (document.getElementById('relay' + i).checked == true){
+                  if (IsBeingTouched == false) {
+                    document.getElementById('relay' + i).switchButton(data, true)
+                  }
+                }
+              }
+            }
+          });
+        }
+      }, 1000);
+
+      setInterval(function(){ 
+        for (let i = 1; i < 9; i++) {
+          $.get( "/get_light_brightness?light_number=" + i, function( data ) {
+            if(data) {
+              if(parseFloat(data)=="0"){
+                if (IsBeingTouched == false){
+                  document.getElementById('light' + i + '_toggle').checked = false;
+                }
+              } else {
+                if (IsBeingTouched == false){
+                  document.getElementById('light' + i + '_toggle').checked = true;
+                }
+              }
+              if (IsBeingTouched == false){
+                document.getElementById('light' + i).value = data
+              }
+            }
+          });
+        }
+      }, 1000);        
+
+      $('input[type=range]').on('touchend', function () {
+          $(this).trigger('change');
+      });
+
+      for (let i = 1; i < 7; i++) {
+        $('#relay' + i).change(function() 
+        {
+          if(this.checked == false)
+          {
+            $.get( "/switch_relay_on?relay_number=" + i + "&relay_value=0", function( data ) { 
+            });
+          }
+          if(this.checked == true)
+          {
+            $.get( "/switch_relay_on?relay_number=" + i + "&relay_value=1", function( data ) {
+            });
+          }        
+        });
+      }
+
+      for (let i = 1; i < 9; i++) {
+        $('#light' + i).change( function() { 
+            var light_val = $(this).val();
+
+            if (light_val == 0){
+                $.get( "/lights_off?light_number=" + i, function( data ) { });
+            } else {
+                $.get( "/lights_on?light_number=" + i + "&brightness=" + light_val, function( data ) { });
+            }
+        });
+      }     
+
+      for (let i = 1; i < 9; i++) {
+        $('#light' + i + '_toggle').change(function() 
+        {
+          if(this.checked == false)
+          {
+               $.get( "/lights_off?light_number=" + i, function( data ) {
+                  $( ".result" ).html( data );
+                });
+          }
+          if(this.checked == true)
+          {
+            $.get( "/get_last_light_brightness?light_number=" + i, function( data ) {
+                  $.get( "/lights_on?light_number=" + i + "&brightness=" + data, function( data ) { });
+                  //document.getElementById('light' + i).value = data
+            });
+          }        
+        });
+      }
+    });
+
+  </script>
+
+</head>
+
+<body ontouchstart="touchStart()" ontouchend="touchEnd()">
+
+<div id="message"></div>
+
+<br><br><br>
+
+<div class="container">
+  <div class="row" style="flex-wrap: nowrap;">
+    <div class="col" style="text-align: center;">
+      <div class="form-check form-switch" style="padding: 0rem;">
+        <input id="relay1" type="checkbox" data-toggle="switchbutton" data-width="200" data-height="100" data-onlabel="Nav Lights<br>On"  data-offlabel="Nav Lights<br>Off">
+      </div>
+    </div>
+    <div class="col" style="text-align: center;">
+      <div class="form-check form-switch" style="padding: 0rem;">
+        <input id="relay2" type="checkbox" data-toggle="switchbutton" data-width="200" data-height="100" data-onlabel="Deck Lights"  data-offlabel="Deck Lights">
+      </div>
+    </div>
+    <div class="col" style="text-align: center;">
+      <div class="form-check form-switch" style="padding: 0rem;">
+        <input id="relay3" type="checkbox" data-toggle="switchbutton" data-width="200" data-height="100" data-onlabel="Mast Light"  data-offlabel="Mast Light">
+      </div>
+    </div> 
+  </div>
+
+  <div class="row" style="flex-wrap: nowrap;">
+    <div class="col" style="height: 40px;text-align: center;">
+      &nbsp;
+    </div>
+    <div class="col" style="text-align: center;">
+      &nbsp;
+    </div>
+    <div class="col" style="text-align: center;">
+      &nbsp;
+    </div>
+  </div>  
+
+  <div class="row" style="flex-wrap: nowrap;">
+    <div class="col" style="text-align: center;">
+      <div class="form-check form-switch" style="padding: 0rem;">
+        <input id="relay4" type="checkbox" data-toggle="switchbutton" data-width="200" data-height="100" data-onlabel="Nav Equip"  data-offlabel="Nav Equip">
+      </div>
+    </div>
+    <div class="col" style="text-align: center;">
+      <div class="form-check form-switch" style="padding: 0rem;">
+        <input id="relay5" type="checkbox" data-toggle="switchbutton" data-width="200" data-height="100" data-onlabel="N/A"  data-offlabel="N/A">
+      </div>
+    </div>
+    <div class="col" style="text-align: center;">
+      <div class="form-check form-switch" style="padding: 0rem;">
+        <input id="relay6" type="checkbox" data-toggle="switchbutton" data-width="200" data-height="100" data-onlabel="N/A"  data-offlabel="N/A">
+      </div>
+    </div> 
+  </div> 
+
+  <div class="row" style="flex-wrap: nowrap;">
+    <div class="col" style="height: 40px;text-align: center;">
+      &nbsp;
+    </div>
+    <div class="col" style="text-align: center;">
+      &nbsp;
+    </div>
+    <div class="col" style="text-align: center;">
+      &nbsp;
+    </div>
+  </div> 
+
+  <div class="row" style="flex-wrap: nowrap;">
+    <div class="col" style="text-align: center;">
+ 
+    <div class="light">
+      <div class="light-slider">
+        <h2>Light 1</h2>
+        <div class="range-holder" style="--slider-height: 150px;">
+          <input id="light1" type="range" min="0" max="1.0" step="0.01" value="0" style="--slider-width: 50px;--slider-height: 150px;">
+        </div>
+      </div>
+      <div class="toggle">
+        <input checked type="checkbox" id='light1_toggle' class='toggle-btn' />
+        <label for='light1_toggle'><span></span></label>
+      </div>  
+    </div>
+ 
+    </div>
+    <div class="col" style="text-align: center;">
+ 
+    <div class="light">
+      <div class="light-slider">
+        <h2>Light 2</h2>
+        <div class="range-holder" style="--slider-height: 150px;">
+          <input id="light2" type="range" min="0" max="1.0" step="0.01" value="0" style="--slider-width: 50px;--slider-height: 150px;">
+        </div>
+      </div>
+      <div class="toggle">
+        <input checked type="checkbox" id='light2_toggle' class='toggle-btn' />
+        <label for='light2_toggle'><span></span></label>
+      </div>  
+    </div>
+
+    </div>
+    <div class="col" style="text-align: center;">
+ 
+    <div class="light">
+      <div class="light-slider">
+        <h2>Light 3</h2>
+        <div class="range-holder" style="--slider-height: 150px;">
+          <input id="light3" type="range" min="0" max="1.0" step="0.01" value="0" style="--slider-width: 50px;--slider-height: 150px;">
+        </div>
+      </div>
+      <div class="toggle">
+        <input checked type="checkbox" id='light3_toggle' class='toggle-btn' />
+        <label for='light3_toggle'><span></span></label>
+      </div>  
+    </div>
+
+    </div> 
+    <div class="col" style="text-align: center;">
+ 
+    <div class="light">
+      <div class="light-slider">
+        <h2>Light 4</h2>
+        <div class="range-holder" style="--slider-height: 150px;">
+          <input id="light4" type="range" min="0" max="1.0" step="0.01" value="0" style="--slider-width: 50px;--slider-height: 150px;">
+        </div>
+      </div>
+      <div class="toggle">
+        <input checked type="checkbox" id='light4_toggle' class='toggle-btn' />
+        <label for='light4_toggle'><span></span></label>
+      </div>  
+    </div>
+
+    </div>
+    <div class="col" style="text-align: center;">
+ 
+    <div class="light">
+      <div class="light-slider">
+        <h2>Light 5</h2>
+        <div class="range-holder" style="--slider-height: 150px;">
+          <input id="light5" type="range" min="0" max="1.0" step="0.01" value="0" style="--slider-width: 50px;--slider-height: 150px;">
+        </div>
+      </div>
+      <div class="toggle">
+        <input checked type="checkbox" id='light5_toggle' class='toggle-btn' />
+        <label for='light5_toggle'><span></span></label>
+      </div>  
+    </div>
+
+    </div>
+    <div class="col" style="text-align: center;">
+ 
+    <div class="light">
+      <div class="light-slider">
+        <h2>Light 6</h2>
+        <div class="range-holder" style="--slider-height: 150px;">
+          <input id="light6" type="range" min="0" max="1.0" step="0.01" value="0" style="--slider-width: 50px;--slider-height: 150px;">
+        </div>
+      </div>
+      <div class="toggle">
+        <input checked type="checkbox" id='light6_toggle' class='toggle-btn' />
+        <label for='light6_toggle'><span></span></label>
+      </div>  
+    </div>
+
+    </div>
+    <div class="col" style="text-align: center;">
+ 
+    <div class="light">
+      <div class="light-slider">
+        <h2>Light 7</h2>
+        <div class="range-holder" style="--slider-height: 150px;">
+          <input id="light7" type="range" min="0" max="1.0" step="0.01" value="0" style="--slider-width: 50px;--slider-height: 150px;">
+        </div>
+      </div>
+      <div class="toggle">
+        <input checked type="checkbox" id='light7_toggle' class='toggle-btn' />
+        <label for='light7_toggle'><span></span></label>
+      </div>  
+    </div>
+
+    </div> 
+    <div class="col" style="text-align: center;">
+ 
+    <div class="light">
+      <div class="light-slider">
+        <h2>Light 8</h2>
+        <div class="range-holder" style="--slider-height: 150px;">
+          <input id="light8" type="range" min="0" max="1.0" step="0.01" value="0" style="--slider-width: 50px;--slider-height: 150px;">
+        </div>
+      </div>
+      <div class="toggle">
+        <input checked type="checkbox" id='light8_toggle' class='toggle-btn' />
+        <label for='light8_toggle'><span></span></label>
+      </div>  
+    </div>
+
+    </div>     
+  </div> 
+
+</div>
+
+</body>
