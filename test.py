@@ -90,12 +90,12 @@ while(1):
                 motor1(1, Dir_backward, 1)
                 x='z'
 
-        if x=='1.5':
+        if x=='50':
                 print("motor right")
                 motor1(1, Dir_backward, 1.5)
                 x='z'
 
-        if x=='0.5':
+        if x=='100':
                 print("motor right")
                 motor1(1, Dir_backward, 0.5)
                 x='z'                                
