@@ -23,15 +23,15 @@ import time
 # motor_EN_A: Pin7  |  motor_EN_B: Pin11
 # motor_A:  Pin8,Pin10    |  motor_B: Pin13,Pin12
 
-Motor_A_EN    = 25
+Motor_A_EN    = 18
 
-Motor_A_Pin1  = 18
-Motor_A_Pin2  = 12
+Motor_A_Pin1  = 24
+Motor_A_Pin2  = 23
 
 Dir_forward   = 0
 Dir_backward  = 1
 
-pwm_A = 0 # PWM Channel
+pwm_A = 0
 
 #GPIO.setmode(GPIO.BOARD)
 
@@ -51,7 +51,10 @@ def setup():#Motor initialization
 def motorStop():#Motor stops
     GPIO.output(Motor_A_Pin1, GPIO.LOW)
     GPIO.output(Motor_A_Pin2, GPIO.LOW)
+    GPIO.output(Motor_B_Pin1, GPIO.LOW)
+    GPIO.output(Motor_B_Pin2, GPIO.LOW)
     GPIO.output(Motor_A_EN, GPIO.LOW)
+    GPIO.output(Motor_B_EN, GPIO.LOW)
 
 def motor1(status, direction, speed):#Motor 1 positive and negative rotation
     global pwm_A
