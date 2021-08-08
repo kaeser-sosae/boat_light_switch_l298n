@@ -91,4 +91,4 @@ while(1):
                 destroy()
 
         else:
-                motor1(1, Dir_backward, x)
+                motor1(1, Dir_backward, float(x))
