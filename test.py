@@ -10,79 +10,85 @@ in2 = 23
 en = 25
 temp1=1
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(in1,GPIO.OUT)
-GPIO.setup(in2,GPIO.OUT)
-GPIO.setup(en,GPIO.OUT)
-GPIO.output(in1,GPIO.LOW)
-GPIO.output(in2,GPIO.LOW)
-p=GPIO.PWM(en,1000)
-p.start(25)
-print("\n")
-print("The default speed & direction of motor is LOW & Forward.....")
-print("r-run s-stop f-forward b-backward l-low m-medium h-high e-exit")
-print("\n")    
+#!/usr/bin/python3
+# File name   : motor.py
+# Description : Control Motors 
+# Website     : www.adeept.com
+# E-mail      : support@adeept.com
+# Author      : William
+# Date        : 2018/10/12
+
+import RPi.GPIO as GPIO
+import time
+# motor_EN_A: Pin7  |  motor_EN_B: Pin11
+# motor_A:  Pin8,Pin10    |  motor_B: Pin13,Pin12
+
+Motor_A_EN    = 25
+
+Motor_A_Pin1  = 24
+Motor_A_Pin2  = 23
+
+Dir_forward   = 0
+Dir_backward  = 1
+
+pwm_A = 0
+
+def setup():#Motor initialization
+    global pwm_A, pwm_B
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(Motor_A_EN, GPIO.OUT)
+    GPIO.setup(Motor_B_EN, GPIO.OUT)
+    GPIO.setup(Motor_A_Pin1, GPIO.OUT)
+    GPIO.setup(Motor_A_Pin2, GPIO.OUT)
+    GPIO.setup(Motor_B_Pin1, GPIO.OUT)
+    GPIO.setup(Motor_B_Pin2, GPIO.OUT)
+    try:
+        pwm_A = GPIO.PWM(Motor_A_EN, 1000)
+        pwm_B = GPIO.PWM(Motor_B_EN, 1000)
+    except:
+        pass
+
+def motorStop():#Motor stops
+    GPIO.output(Motor_A_Pin1, GPIO.LOW)
+    GPIO.output(Motor_A_Pin2, GPIO.LOW)
+    GPIO.output(Motor_B_Pin1, GPIO.LOW)
+    GPIO.output(Motor_B_Pin2, GPIO.LOW)
+    GPIO.output(Motor_A_EN, GPIO.LOW)
+    GPIO.output(Motor_B_EN, GPIO.LOW)
+
+def motor1(status, direction, speed):#Motor 1 positive and negative rotation
+    global pwm_A
+    if status == 0: # stop
+        motorStop()
+    else:
+        if direction == Dir_forward:#
+            GPIO.output(Motor_A_Pin1, GPIO.HIGH)
+            GPIO.output(Motor_A_Pin2, GPIO.LOW)
+            pwm_A.start(100)
+            pwm_A.ChangeDutyCycle(speed)
+        elif direction == Dir_backward:
+            GPIO.output(Motor_A_Pin1, GPIO.LOW)
+            GPIO.output(Motor_A_Pin2, GPIO.HIGH)
+            pwm_A.start(0)
+            pwm_A.ChangeDutyCycle(speed)
+    return direction
+
 
 while(1):
 
-    x=input()
+        x=raw_input()
     
-    if x=='r':
-        print("run")
-        if(temp1==1):
-         GPIO.output(in1,GPIO.HIGH)
-         GPIO.output(in2,GPIO.LOW)
-         print("forward")
-         x='z'
+        if x=='r':
+                print("motor right")
+                motor1(1, Dir_forward, 1)
+                x='z'
+    
         else:
-         GPIO.output(in1,GPIO.LOW)
-         GPIO.output(in2,GPIO.HIGH)
-         print("backward")
-         x='z'
+                print("<<<  wrong data  >>>")
+                print("please enter the defined data to continue.....")
 
 
-    elif x=='s':
-        print("stop")
-        GPIO.output(in1,GPIO.LOW)
-        GPIO.output(in2,GPIO.LOW)
-        x='z'
-
-    elif x=='f':
-        print("forward")
-        GPIO.output(in1,GPIO.HIGH)
-        GPIO.output(in2,GPIO.LOW)
-        temp1=1
-        x='z'
-
-    elif x=='b':
-        print("backward")
-        GPIO.output(in1,GPIO.LOW)
-        GPIO.output(in2,GPIO.HIGH)
-        temp1=0
-        x='z'
-
-    elif x=='l':
-        print("low")
-        p.ChangeDutyCycle(25)
-        x='z'
-
-    elif x=='m':
-        print("medium")
-        p.ChangeDutyCycle(50)
-        x='z'
-
-    elif x=='h':
-        print("high")
-        p.ChangeDutyCycle(75)
-        x='z'
-     
-    
-    elif x=='e':
-        GPIO.cleanup()
-        break
-    
-    else:
-        print("<<<  wrong data  >>>")
-        print("please enter the defined data to continue.....")
-
-
+def destroy():
+    motorStop()
+    GPIO.cleanup()             # Release resource
