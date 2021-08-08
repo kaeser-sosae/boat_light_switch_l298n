@@ -66,12 +66,12 @@ def motor1(status, direction, speed):#Motor 1 positive and negative rotation
             GPIO.output(Motor_A_Pin1, GPIO.HIGH)
             GPIO.output(Motor_A_Pin2, GPIO.LOW)
             pwm_A.start(100)
-            pwm_A.ChangeDutyCycle(speed)
+            pwm_A.change_duty_cycle(speed)
         elif direction == Dir_backward:
             GPIO.output(Motor_A_Pin1, GPIO.LOW)
             GPIO.output(Motor_A_Pin2, GPIO.HIGH)
             pwm_A.start(0)
-            pwm_A.ChangeDutyCycle(speed)
+            pwm_A.change_duty_cycle(speed)
     return direction
 
 def destroy():
