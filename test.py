@@ -33,16 +33,16 @@ Dir_backward  = 1
 
 pwm_A = 0
 
+GPIO.setmode(GPIO.BOARD)
+
 def setup():#Motor initialization
     global pwm_A, pwm_B
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(Motor_A_EN, GPIO.OUT)
-    GPIO.setup(Motor_B_EN, GPIO.OUT)
     GPIO.setup(Motor_A_Pin1, GPIO.OUT)
     GPIO.setup(Motor_A_Pin2, GPIO.OUT)
-    GPIO.setup(Motor_B_Pin1, GPIO.OUT)
-    GPIO.setup(Motor_B_Pin2, GPIO.OUT)
+
     try:
         pwm_A = GPIO.PWM(Motor_A_EN, 1000)
         pwm_B = GPIO.PWM(Motor_B_EN, 1000)
