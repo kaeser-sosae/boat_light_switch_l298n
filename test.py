@@ -1,6 +1,3 @@
-from flask import Flask
-from flask import request
-from flask import render_template
 from decimal import Decimal
 import time
 import board
