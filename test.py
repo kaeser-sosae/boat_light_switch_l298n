@@ -82,16 +82,12 @@ while(1):
     
         if x=='r':
                 print("motor right")
-                motor1(1, Dir_forward, 1)
+                motor1(1, Dir_backward, 1)
                 x='z'
 
         if x=='exit':
                 destroy()                
     
-        else:
-                print("<<<  wrong data  >>>")
-                print("please enter the defined data to continue.....")
-
 
 def destroy():
     motorStop()
