@@ -51,10 +51,7 @@ def setup():#Motor initialization
 def motorStop():#Motor stops
     GPIO.output(Motor_A_Pin1, GPIO.LOW)
     GPIO.output(Motor_A_Pin2, GPIO.LOW)
-    GPIO.output(Motor_B_Pin1, GPIO.LOW)
-    GPIO.output(Motor_B_Pin2, GPIO.LOW)
     GPIO.output(Motor_A_EN, GPIO.LOW)
-    GPIO.output(Motor_B_EN, GPIO.LOW)
 
 def motor1(status, direction, speed):#Motor 1 positive and negative rotation
     global pwm_A
