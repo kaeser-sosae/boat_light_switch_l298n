@@ -44,7 +44,7 @@ def setup():#Motor initialization
     GPIO.setup(Motor_A_Pin2, GPIO.OUT)
 
     try:
-        pwm_A = GPIO.PWM(Motor_A_EN, 5000)
+        pwm_A = GPIO.PWM(Motor_A_EN, 100)
     except:
         print('Could not define PWM pin')
 
@@ -92,12 +92,12 @@ while(1):
 
         if x=='50':
                 print("motor right")
-                motor1(1, Dir_backward, 1.5)
+                motor1(1, Dir_backward, 50)
                 x='z'
 
         if x=='100':
                 print("motor right")
-                motor1(1, Dir_backward, 0.5)
+                motor1(1, Dir_backward, 100)
                 x='z'                                
 
         if x=='exit':
