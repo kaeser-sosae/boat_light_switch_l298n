@@ -48,7 +48,7 @@ def setup():#Motor initialization
 
     try:
         #pwm_A = GPIO.PWM(Motor_A_EN, 10000)
-        pwm_A = HardwarePWM(0, hz=1000)
+        pwm_A = HardwarePWM(0, hz=500)
     except:
         print('Could not define PWM pin')
 
