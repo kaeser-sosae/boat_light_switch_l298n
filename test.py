@@ -74,21 +74,30 @@ def motor1(status, direction, speed):#Motor 1 positive and negative rotation
             pwm_A.ChangeDutyCycle(speed)
     return direction
 
+def destroy():
+        motorStop()
+        GPIO.cleanup()             # Release resource
+
 setup()
 
 while(1):
 
         x=input()
     
-        if x=='r':
+        if x=='1':
                 print("motor right")
                 motor1(1, Dir_backward, 1)
                 x='z'
 
-        if x=='exit':
-                destroy()                
-    
+        if x=='1.5':
+                print("motor right")
+                motor1(1, Dir_backward, 1.5)
+                x='z'
 
-def destroy():
-    motorStop()
-    GPIO.cleanup()             # Release resource
+        if x=='0.5':
+                print("motor right")
+                motor1(1, Dir_backward, 0.5)
+                x='z'                                
+
+        if x=='exit':
+                destroy()
