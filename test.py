@@ -80,25 +80,15 @@ while(1):
 
         x=input()
     
+
+
         if x=='0':
                 print("motor stop")
                 motorStop()
                 x='z'
 
-        if x=='1':
-                print("motor right")
-                motor1(1, Dir_backward, 1)
-                x='z'
-
-        if x=='50':
-                print("motor right")
-                motor1(1, Dir_backward, 50)
-                x='z'
-
-        if x=='100':
-                print("motor right")
-                motor1(1, Dir_backward, 100)
-                x='z'                                
-
         if x=='exit':
                 destroy()
+
+        elif:
+                motor1(1, Dir_backward, x)
