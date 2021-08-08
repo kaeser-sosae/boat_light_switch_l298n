@@ -1,7 +1,8 @@
 from decimal import Decimal
 import time
 import os
-import RPi.GPIO as GPIO 
+import RPi.GPIO as GPIO
+from time import sleep
 
 
 in1 = 24
@@ -24,7 +25,7 @@ print("\n")
 
 while(1):
 
-    x=raw_input()
+    x=input()
     
     if x=='r':
         print("run")
