@@ -1,3 +1,6 @@
+# Follow instructions at https://pypi.org/project/rpi-hardware-pwm/
+
+from rpi_hardware_pwm import HardwarePWM
 from decimal import Decimal
 import time
 import os
@@ -44,7 +47,8 @@ def setup():#Motor initialization
     GPIO.setup(Motor_A_Pin2, GPIO.OUT)
 
     try:
-        pwm_A = GPIO.PWM(Motor_A_EN, 10000)
+        #pwm_A = GPIO.PWM(Motor_A_EN, 10000)
+        pwm_A = HardwarePWM(0, hz=60)
     except:
         print('Could not define PWM pin')
 
