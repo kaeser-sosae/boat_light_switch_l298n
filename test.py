@@ -87,8 +87,8 @@ while(1):
                 motorStop()
                 x='z'
 
-        if x=='exit':
+        elif x=='exit':
                 destroy()
 
-        elif:
+        else:
                 motor1(1, Dir_backward, x)
