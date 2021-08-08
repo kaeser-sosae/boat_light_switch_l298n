@@ -1,9 +1,5 @@
 from decimal import Decimal
 import time
-import board
-import pathlib
-import sys
-import lib8relay
 import os
 import RPi.GPIO as GPIO 
 
