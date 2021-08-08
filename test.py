@@ -86,9 +86,7 @@ while(1):
                 x='z'
 
         if x=='exit':
-                print("motor right")
-                motor1(1, Dir_forward, 1)
-                x='z'                
+                destroy()                
     
         else:
                 print("<<<  wrong data  >>>")
