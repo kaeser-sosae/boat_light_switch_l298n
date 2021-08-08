@@ -63,7 +63,7 @@ def motorStop():#Motor stops
 
 def motor1(status, direction, speed):#Motor 1 positive and negative rotation
     global pwm_A
-    print('Frequency is currently ' + str(pi.get_PWM_frequency(18))
+    print('Frequency is currently ' + str(pi.get_PWM_frequency(18)))
     if status == 0: # stop
         motorStop()
     else:
