@@ -48,7 +48,7 @@ def setup():#Motor initialization
 
     try:
         #pwm_A = GPIO.PWM(Motor_A_EN, 10000)
-        pwm_A = HardwarePWM(0, hz=500)
+        pwm_A = HardwarePWM(0, hz=100)
     except:
         print('Could not define PWM pin')
 
@@ -70,7 +70,7 @@ def motor1(status, direction, speed):#Motor 1 positive and negative rotation
         elif direction == Dir_backward:
             GPIO.output(Motor_A_Pin1, GPIO.LOW)
             GPIO.output(Motor_A_Pin2, GPIO.HIGH)
-            pwm_A.start(0)
+            pwm_A.start(100)
             pwm_A.change_duty_cycle(speed)
     return direction
 
