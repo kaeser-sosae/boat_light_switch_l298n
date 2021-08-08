@@ -33,7 +33,7 @@ Dir_backward  = 1
 
 pwm_A = 0
 
-GPIO.setmode(GPIO.BOARD)
+#GPIO.setmode(GPIO.BOARD)
 
 def setup():#Motor initialization
     global pwm_A, pwm_B
@@ -74,6 +74,7 @@ def motor1(status, direction, speed):#Motor 1 positive and negative rotation
             pwm_A.ChangeDutyCycle(speed)
     return direction
 
+setup()
 
 while(1):
 
@@ -83,6 +84,11 @@ while(1):
                 print("motor right")
                 motor1(1, Dir_forward, 1)
                 x='z'
+
+        if x=='exit':
+                print("motor right")
+                motor1(1, Dir_forward, 1)
+                x='z'                
     
         else:
                 print("<<<  wrong data  >>>")
