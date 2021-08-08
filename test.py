@@ -77,7 +77,7 @@ def motor1(status, direction, speed):#Motor 1 positive and negative rotation
 
 while(1):
 
-        x=raw_input()
+        x=input()
     
         if x=='r':
                 print("motor right")
